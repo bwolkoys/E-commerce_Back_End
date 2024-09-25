@@ -23,3 +23,5 @@
 ## Resources 
 
 - for installing sequelize: https://sequelize.org/docs/v6/getting-started/ 
+
+## Video Demo
