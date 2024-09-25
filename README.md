@@ -28,5 +28,6 @@
 - status 404: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404 
 - status 500: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500 
 - status 400: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400 
+- validations inside each of the js files in models: https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/ 
 
 ## Video Demo
