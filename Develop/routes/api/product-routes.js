@@ -4,15 +4,58 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
+  //routes for this page in Module 13 Activity 11-Ins_RESTful-Routes (api, userRoutes.js)
+  // find all in module 13 Activity 25-Ins_Literals
+ try {
+  const productData = await Product.findAll ({
+    include: [
+      {
+        model: Category,
+      },
+      {
+        model: Tag,
+        attributes: ['tag_name'],
+        through: ProductTag,
+        as: 'productTag_products',
+      },
+    ]
+  }); res.status(200).json(productData);
+    } catch (err) {
+      res.status(500).json(err);
+ }
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+  try {
+    const productData = await Product.findByPk(req.params.id, {
+      include: [
+        { 
+          model: Category
+        }, 
+        { model: Tag, 
+          attributes: ['tag_name'], 
+          through: ProductTag, 
+          as: 'productTag_products'
+        }
+      ]
+    });
+    //!productData check to see if its undefined, null ro empty
+    if (!productData) {
+      //if it comes back as one of those 3 then it spits out message saying ID not found
+        res.status(400).json({ message: 'id not found' });
+        return;
+    }
+    // if productData is found it will spit out a success
+    res.status(200).json(productData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // create new product
@@ -94,6 +137,21 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  //trying this one without the async and await
+  Product.destroy ({
+    where: {
+      //id is they key and it's taken from the route parameter.
+      id: req.params.id
+    }
+  }) .then(productData => {
+    if (!productData) {
+      res.status(404).json({message: 'id not found'}); return;
+    }
+    res.json(productData);
+  }) .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  })
 });
 
 module.exports = router;
