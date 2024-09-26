@@ -48,8 +48,7 @@ router.get('/:id', async (req, res) => {
     //!productData check to see if its undefined, null ro empty
     if (!productData) {
       //if it comes back as one of those 3 then it spits out message saying ID not found
-        res.status(400).json({ message: 'id not found' });
-        return;
+        return res.status(400).json({ message: 'id not found' });
     }
     // if productData is found it will spit out a success
     res.status(200).json(productData);
@@ -145,7 +144,7 @@ router.delete('/:id', (req, res) => {
     }
   }) .then(productData => {
     if (!productData) {
-      res.status(404).json({message: 'id not found'}); return;
+      return res.status(404).json({message: 'id not found'});
     }
     res.json(productData);
   }) .catch(err => {
