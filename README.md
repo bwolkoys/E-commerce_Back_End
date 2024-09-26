@@ -30,5 +30,6 @@
 - status 400: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400 
 - validations inside each of the js files in models: https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/ 
 - findByPk from Module 14: Activity 09-Ins_Handlebars-FE-Logic
+- https://www.npmjs.com/package/dotenv-cli 
 
 ## Video Demo
