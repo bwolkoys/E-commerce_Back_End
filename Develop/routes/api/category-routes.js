@@ -12,7 +12,9 @@ router.get('/', (req, res) => {
         model: Product
       }
     ]
-  }) .then(categoryData => res.json(categoryData))
+  }) 
+  //it's a promise and sends data as a json response from the categoryData
+  .then(categoryData => res.json(categoryData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -20,8 +22,9 @@ router.get('/', (req, res) => {
   
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
+  //used await to pause the function until after the Category.findByPk promise is returned. I added "async" to code line above so the await would work
   try {
     const categoryData = await Category.findByPk(req.params.id, {
       include: [{ model: Product }]
@@ -30,11 +33,13 @@ router.get('/:id', (req, res) => {
       res.status(404).json({message: 'No ID found in this Category'});
       return;
     }
+  } catch (err) {
+    res.status(500).json(err);
   }
   // be sure to include its associated Products
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
   try {
     const categoryData = await Category.create(req.body);
@@ -44,7 +49,7 @@ router.post('/', (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   await Category.update(req.body, {
     where: {

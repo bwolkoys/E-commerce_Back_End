@@ -9,8 +9,10 @@ ProductTag.init(
     // define columns
     id: {
       type: DataTypes.INTEGER,
+      //makes sure that the column has a value and can't be set to null or empty
       allowNull: false,
       primaryKey: true,
+      //used for the primary key, this will be auto "filled out" by the database
       autoIncrement: true,
     },
     product_id: {
@@ -22,6 +24,7 @@ ProductTag.init(
     },
     tag_id: {
       type: DataTypes.INTEGER,
+      //references found in documentation listed in Readme resources
       references: {
         model: 'tag',
         key: 'id',
