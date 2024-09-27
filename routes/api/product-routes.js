@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
         model: Tag,
         attributes: ['tag_name'],
         through: ProductTag,
-        as: 'productTag_products',
+        // as: 'productTag_products',
       },
     ]
   }); res.status(200).json(productData);
@@ -41,7 +41,7 @@ router.get('/:id', async (req, res) => {
         { model: Tag, 
           attributes: ['tag_name'], 
           through: ProductTag, 
-          as: 'productTag_products'
+          // as: 'productTag_products'
         }
       ]
     });

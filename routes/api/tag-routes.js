@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
         model: Product,
         //I believe this states that it's many-to-many because there are multiple tags and multiple products so productTag combines them 
         through: ProductTag,
-        as: 'productTag_product'
+        //as: 'productTag_product'
       }
     ]
   })
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
       {
         model: Product,
         through: ProductTag,
-        as: 'productTag_product'
+        //as: 'productTag_product'
       }
     ]
   }) 
@@ -106,7 +106,7 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   }) .then (TagData => {
-    if (TagData) {
+    if (!TagData) {
       return res.status(404).json({message: 'No id found'});
     }
     res.json({TagData})
