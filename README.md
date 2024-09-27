@@ -1,5 +1,9 @@
 # E-commerce Back End Starter Code
 
+## Description
+
+This project is building the back end to an e-commerce site and texting the routes. I used insomnia to test all the routes for category, product and tag. Some of the packages I downloaded are pg, express, dotenv and sequelize.
+
 ## User Story
 
 - AS A manager at an internet retail company
